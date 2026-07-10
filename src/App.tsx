@@ -82,9 +82,9 @@ export default function App() {
         ) : forecast.isLoading || !forecast.data ? (
           <DashboardSkeleton />
         ) : (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {/* Hero spans two columns on wide screens */}
-            <div className="md:col-span-2">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {/* Hero spans the full top row */}
+            <div className="col-span-full">
               <CurrentConditions
                 forecast={forecast.data}
                 location={location}
@@ -93,8 +93,6 @@ export default function App() {
                 onToggleFavorite={() => toggleFavorite(location)}
               />
             </div>
-
-            <InsightsCard forecast={forecast.data} prefs={prefs} delay={0.05} />
 
             <HourlyForecast forecast={forecast.data} prefs={prefs} delay={0.1} />
 
@@ -109,6 +107,8 @@ export default function App() {
             )}
 
             <SunMoonCard forecast={forecast.data} prefs={prefs} delay={0.25} />
+
+            <InsightsCard forecast={forecast.data} prefs={prefs} delay={0.3} />
 
             <Suspense fallback={<div className="card col-span-full h-96 animate-pulse" />}>
               <RadarMap location={location} />
@@ -130,15 +130,15 @@ export default function App() {
 
 function DashboardSkeleton() {
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-      <div className="md:col-span-2">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="col-span-full">
         <CardSkeleton lines={5} />
       </div>
-      <CardSkeleton lines={4} />
       <div className="col-span-full">
         <CardSkeleton lines={6} />
       </div>
       <CardSkeleton lines={6} />
+      <CardSkeleton lines={4} />
       <CardSkeleton lines={4} />
       <CardSkeleton lines={4} />
     </div>

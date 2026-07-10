@@ -21,7 +21,7 @@ export function CurrentConditions({
   isFavorite,
   onToggleFavorite,
 }: CurrentConditionsProps) {
-  const { current } = forecast
+  const { current, daily } = forecast
   const isDay = current.is_day === 1
   const summary = buildSummary(forecast, prefs)
   const placeLabel = [location.name, location.admin1, location.country].filter(Boolean).join(', ')
@@ -78,6 +78,10 @@ export function CurrentConditions({
         >
           {formatTemp(current.temperature_2m)}
         </motion.span>
+        <div className="flex flex-col gap-0.5 text-sm text-muted tabular-nums">
+          <span>H {formatTemp(daily.temperature_2m_max[0])}</span>
+          <span>L {formatTemp(daily.temperature_2m_min[0])}</span>
+        </div>
         <WeatherIcon code={current.weather_code} isDay={isDay} size={72} className="text-accent" />
       </div>
 
